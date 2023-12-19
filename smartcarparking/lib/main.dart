@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartcarparking/ContactUsPage.dart';
 import 'package:smartcarparking/HelpPage.dart';
 import 'package:smartcarparking/HomePage.dart';
 import 'package:smartcarparking/LoginPage.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HelpPage()
+      home: ContactUs()
       );
 
   }
