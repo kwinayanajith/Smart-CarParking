@@ -108,7 +108,15 @@ class LoginPage extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.bold
                 ),)),
-              )
+              ),
+
+              SizedBox(height: 10,),
+              
+              Text("Dont’t have Account ? Sign Up",style: TextStyle(
+                fontSize: 18,
+                color: Colors.black45,
+                fontWeight: FontWeight.bold
+              ),)
 
 
 
