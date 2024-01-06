@@ -14,17 +14,17 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final firstNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
 
-  final lastNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 
-  final emailController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-  final phoneNumberController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
 
-  final passwordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  final confirmPasswordController =  TextEditingController();
+  TextEditingController confirmPasswordController =  TextEditingController();
 
   Future<void> createUser(BuildContext context) async {
     // Validate input fields
@@ -209,6 +209,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextField(
+                  keyboardType: TextInputType.number, //get number keyboard
                   controller: phoneNumberController,
                   obscureText: false,
                   decoration: InputDecoration(
