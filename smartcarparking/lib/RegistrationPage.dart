@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 class RegistrationPage extends StatelessWidget {
    RegistrationPage({super.key});
 
-  final textController = TextEditingController();
+  final vehicleNumberController = TextEditingController();
+  final idNumber = TextEditingController();
+  final vehicleType = TextEditingController();
+  final vehicleModel = TextEditingController();
+  final nickName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      title: Text("Vehicale Registration"),
-    ),
+    // appBar: AppBar(
+    //   title: Text("Vehicale Registration"),
+    // ),
 
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 100,),
                Text("Vehicle Registration", style: TextStyle(
                  fontSize: 20,
                  color: Colors.black54,
@@ -26,143 +30,115 @@ class RegistrationPage extends StatelessWidget {
 
               SizedBox(height: 30,),
 
-              Container(
-                  width: 350,
-                  height: 50,
-                  child: TextField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      fillColor: Colors.blue.shade100,
-                      filled: true,
-                      hintText: "Vehicle Number",
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  controller: vehicleNumberController,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
                     ),
-                  )
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    fillColor: Colors.blue.shade100,
+                    filled: true,
+                    hintText: "Vehicle Number",
+                  ),
+                ),
               ),
 
               SizedBox(height: 15,),
 
-              Container(
-                  width: 350,
-                  height: 50,
-                  child: TextField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      fillColor: Colors.blue.shade100,
-                      filled: true,
-                      hintText: "ID Number",
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  controller: idNumber,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
                     ),
-                  )
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    fillColor: Colors.blue.shade100,
+                    filled: true,
+                    hintText: "ID Number",
+                  ),
+                ),
               ),
 
               SizedBox(height: 15,),
 
-              Container(
-                  width: 350,
-                  height: 50,
-                  child: TextField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      fillColor: Colors.blue.shade100,
-                      filled: true,
-                      hintText: "Vehicle Type",
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  controller: vehicleType,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
                     ),
-                  )
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    fillColor: Colors.blue.shade100,
+                    filled: true,
+                    hintText: "Vehicle Type",
+                  ),
+                ),
               ),
 
               SizedBox(height: 15,),
 
-              Container(
-                  width: 350,
-                  height: 50,
-                  child: TextField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      fillColor: Colors.blue.shade100,
-                      filled: true,
-                      hintText: "Vehicle Model",
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  controller: vehicleModel,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
                     ),
-                  )
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blueAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    fillColor: Colors.blue.shade100,
+                    filled: true,
+                    hintText: "Vehicle Model",
+                  ),
+                ),
               ),
 
               SizedBox(height: 15,),
 
-              Container(
-                  width: 350,
-                  height: 50,
-                  child: TextField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueAccent,
-                          ),
-                          borderRadius: BorderRadius.circular(20)
-                      ),
-                      fillColor: Colors.blue.shade100,
-                      filled: true,
-                      hintText: "Nick Name",
-                    ),
-                  )
-              ),
+              
 
               SizedBox(height: 40,),
 
