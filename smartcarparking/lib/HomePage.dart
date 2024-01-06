@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
                     width: 135,
                     decoration: BoxDecoration(
                       color: Colors.blueAccent,
-                      borderRadius: BorderRadius.circular(15)
+                      borderRadius: BorderRadius.circular(15),
                     ),
 
                     child: Center(

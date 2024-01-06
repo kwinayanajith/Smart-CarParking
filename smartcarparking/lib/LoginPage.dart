@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   )
               ),
-oo===
+
               SizedBox(height: 20,),
 
               Text("Forgot Password?",
