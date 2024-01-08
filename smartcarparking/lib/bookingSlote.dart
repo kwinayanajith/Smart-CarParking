@@ -27,6 +27,7 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
   String password_ = "";
 
   String? selectedVehicle;
+  String? selectedSlot;
 
   String getCurrentDateTime() {
     final now = DateTime.now();
@@ -143,8 +144,7 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 10,),
-            
+            SizedBox(height: 10),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -161,21 +161,37 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
                         shrinkWrap: true,
                         itemCount: electricSlotsList.length,
                         itemBuilder: (context, index) {
-                          Color tileColor = electricSlotsList[index].availability == '1' ? Colors.white : Colors.red;
-                          return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 30),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: tileColor,
-                            ),
-                            child: ListTile(
-                              title: Text(electricSlotsList[index].slotID),
+                          Color tileColor =
+                          electricSlotsList[index].availability == '1'
+                              ? Colors.white
+                              : Colors.red;
+                          return GestureDetector(
+                            onTap: () {
+                              if (electricSlotsList[index].availability ==
+                                  '1') {
+                                setState(() {
+                                  selectedSlot =
+                                      electricSlotsList[index].slotID;
+                                });
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: selectedSlot ==
+                                    electricSlotsList[index].slotID
+                                    ? Colors.blue
+                                    : tileColor,
+                              ),
+                              child: ListTile(
+                                title: Text(electricSlotsList[index].slotID),
+                              ),
                             ),
                           );
                         },
                       ),
-
                     ],
                   ),
                 ),
@@ -192,16 +208,34 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
                         shrinkWrap: true,
                         itemCount: handicapSlotsList.length,
                         itemBuilder: (context, index) {
-                          Color tileColor = handicapSlotsList[index].availability == '1' ? Colors.white : Colors.red;
-                          return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 30),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: tileColor,
-                            ),
-                            child: ListTile(
-                              title: Text(handicapSlotsList[index].slotID),
+                          Color tileColor =
+                          handicapSlotsList[index].availability == '1'
+                              ? Colors.white
+                              : Colors.red;
+                          return GestureDetector(
+                            onTap: () {
+                              if (handicapSlotsList[index].availability ==
+                                  '1') {
+                                setState(() {
+                                  selectedSlot =
+                                      handicapSlotsList[index].slotID;
+                                });
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: selectedSlot ==
+                                    handicapSlotsList[index].slotID
+                                    ? Colors.blue
+                                    : tileColor,
+                              ),
+                              child: ListTile(
+                                title:
+                                Text(handicapSlotsList[index].slotID),
+                              ),
                             ),
                           );
                         },
@@ -222,16 +256,33 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
                         shrinkWrap: true,
                         itemCount: regularSlotsList.length,
                         itemBuilder: (context, index) {
-                          Color tileColor = regularSlotsList[index].availability == '1' ? Colors.white : Colors.red;
-                          return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 30),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: tileColor,
-                            ),
-                            child: ListTile(
-                              title: Text(regularSlotsList[index].slotID),
+                          Color tileColor =
+                          regularSlotsList[index].availability == '1'
+                              ? Colors.white
+                              : Colors.red;
+                          return GestureDetector(
+                            onTap: () {
+                              if (regularSlotsList[index].availability ==
+                                  '1') {
+                                setState(() {
+                                  selectedSlot =
+                                      regularSlotsList[index].slotID;
+                                });
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: selectedSlot ==
+                                    regularSlotsList[index].slotID
+                                    ? Colors.blue
+                                    : tileColor,
+                              ),
+                              child: ListTile(
+                                title: Text(regularSlotsList[index].slotID),
+                              ),
                             ),
                           );
                         },
@@ -241,32 +292,34 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
                 )
               ],
             ),
-            
-            SizedBox(height: 10,),
-            
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('In Time: ',style: TextStyle(
+                Text(
+                  'In Time: ',
+                  style: TextStyle(
                     fontSize: 18,
-                    color: Colors.deepPurpleAccent
-                ),),
-                Text(getCurrentDateTime(),style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.deepPurpleAccent
-                ),),
+                    color: Colors.deepPurpleAccent,
+                  ),
+                ),
+                Text(
+                  getCurrentDateTime(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                ),
               ],
             ),
-
-            SizedBox(height: 15,),
-
+            SizedBox(height: 15),
             DropdownButton<String>(
               hint: Text('Select Your Vehicle'),
               value: selectedVehicle,
               onChanged: (newValue) {
                 setState(() {
                   selectedVehicle = newValue!;
-                  print('Selected Vehicle: $selectedVehicle');
+                  // print('Selected Vehicle: $selectedVehicle');
                 });
               },
               items: vehiclesList.map<DropdownMenuItem<String>>((vehicle) {
@@ -276,19 +329,22 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
                 );
               }).toList(),
             ),
-
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-
+                if (selectedSlot != null && selectedVehicle != null) {
+                  print('Selected Slot: $selectedSlot');
+                  print('Selected Vehicle: $selectedVehicle');
+                  print('Time: ${getCurrentDateTime()}');
+                } else {
+                  print('Please select both slot and vehicle.');
+                }
               },
               child: Text('Park In'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent.shade700,
               ),
             ),
-
-
-            
           ],
         ),
       ),
