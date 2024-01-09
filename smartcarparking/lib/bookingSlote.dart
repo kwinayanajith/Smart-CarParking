@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Componentes/components.dart';
+import 'HomePage.dart';
+import 'markOutPage.dart';
 class ParkingAvailability extends StatefulWidget {
   const ParkingAvailability({Key? key}) : super(key: key);
 
@@ -39,8 +43,21 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
   void initState() {
     super.initState();
     // Call the function to get the vehicle list when the widget is created
+    checkParkingStatus();
     getSlotsList();
     loadData();
+  }
+
+  Future<void> checkParkingStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isParked = prefs.getBool('parking_status') ?? false;
+
+    if (isParked) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MarkOutPage()),
+      );
+    }
   }
 
 
@@ -101,6 +118,17 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
     getVehiclesList(userName);
   }
 
+  Future<void> saveParkingStatus(bool isParked, String? selectedVehicle, String? selectedSlot) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Save parking status (true: 1 / false: 0)
+    await prefs.setBool('parking_status', isParked);
+
+    // Save selected vehicle and slot
+    await prefs.setString('selected_vehicle', selectedVehicle ?? '');
+    await prefs.setString('selected_slot', selectedSlot ?? '');
+  }
+
 
   Future<void> getVehiclesList(String userName,) async {
     vehiclesList.clear();
@@ -135,11 +163,87 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
       throw Exception('Failed to load subtasks from API');
     }
   }
+
+  Future<bool> changeAvailability(
+      BuildContext context, ) async {
+    // Prepare the data to be sent to the PHP script.
+    var data = {
+      "solts_id": selectedSlot,
+      "availability": '0',
+      "in_time": getCurrentDateTime(),
+      "out_time": '',
+      "deference": '',
+      "used_by": userName,
+      "vehicle_number": selectedVehicle,
+    };
+
+    // URL of your PHP script.
+    const url = "http://dev.workspace.cbs.lk/changeAvailabilitySP.php";
+
+    try {
+      final res = await http.post(
+        Uri.parse(url),
+        body: data,
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      );
+
+      if (res.statusCode == 200) {
+        final responseBody = jsonDecode(res.body);
+
+        // Debugging: Print the response data.
+        print("Response from PHP script: $responseBody");
+
+        if (responseBody == "true") {
+          print('Successful');
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Marked In successfully!'),
+              duration: Duration(seconds: 3),
+            ),
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MarkOutPage()),
+          );
+
+          return true; // PHP code was successful.
+        } else {
+          print('PHP code returned "false".');
+          return false; // PHP code returned "false."
+        }
+      } else {
+        print('HTTP request failed with status code: ${res.statusCode}');
+        return false; // HTTP request failed.
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+      return false; // An error occurred.
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Parking Availability"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
+        ),
+        actions: [
+          IconButton(onPressed: (){
+            getSlotsList();
+          }, icon: Icon(Icons.refresh_rounded)),
+          SizedBox(width: 10,)
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -331,16 +435,26 @@ class _ParkingAvailabilityState extends State<ParkingAvailability> {
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (selectedSlot != null && selectedVehicle != null) {
                   print('Selected Slot: $selectedSlot');
                   print('Selected Vehicle: $selectedVehicle');
                   print('Time: ${getCurrentDateTime()}');
                 } else {
-                  print('Please select both slot and vehicle.');
+                  snackBar(
+                      context, "Please select both slot and vehicle.", Colors.redAccent.shade700);
+                  print('');
+                }
+                changeAvailability(context);
+                bool isParked = true; // Determine isParked based on your logic
+
+                await saveParkingStatus(isParked, selectedVehicle, selectedSlot);
+
+                if (isParked) {
+
                 }
               },
-              child: Text('Park In'),
+              child: Text('Mark Your In'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent.shade700,
               ),
