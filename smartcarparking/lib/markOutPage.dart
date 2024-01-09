@@ -59,8 +59,8 @@ class _MarkOutPageState extends State<MarkOutPage> {
     var data = {
       "solts_id": selectedSlot,
       "availability": '1',
-      "in_time": getCurrentDateTime(),
-      "out_time": '',
+      "in_time": '',
+      "out_time": getCurrentDateTime(),
       "deference": '',
       "used_by": '',
       "vehicle_number": '',
